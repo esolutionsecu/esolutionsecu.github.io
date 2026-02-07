@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios - E-Solutions Ecuador</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #4A6B7C;
+            --secondary-color: #C5FF3E;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f5f5f5;
+            --text-dark: #333;
+            --text-light: #fff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        /* Header y Navegación */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2d4450 100%);
+            color: var(--text-light);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--secondary-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-light);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2d4450 100%);
+            color: var(--text-light);
+            padding: 120px 2rem 60px;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .page-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Servicios Section */
+        .servicios-section {
+            padding: 60px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary-color);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2d4450 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-icon i {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+        }
+
+        .service-card h3 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .service-features li i {
+            color: var(--secondary-color);
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--secondary-color);
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #b3e635;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(197, 255, 62, 0.4);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2d4450 100%);
+            color: var(--text-light);
+            padding: 60px 2rem;
+            text-align: center;
+            margin-top: 60px;
+            border-radius: 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: transparent;
+            color: var(--text-light);
+            text-decoration: none;
+            border: 2px solid var(--text-light);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-light);
+            color: var(--primary-color);
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 15px rgba(0,0,0,0.3);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 2px 2px 25px rgba(0,0,0,0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: var(--primary-color);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .page-header h2 {
+                font-size: 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='95' fill='none' stroke='%234A6B7C' stroke-width='8'/%3E%3Cpath d='M100,40 L120,70 L100,70 L100,130 L120,130 L100,160 L80,130 L100,130 L100,70 L80,70 Z' fill='%234A6B7C'/%3E%3Ccircle cx='70' cy='60' r='8' fill='%23C5FF3E'/%3E%3Ccircle cx='130' cy='60' r='8' fill='%23C5FF3E'/%3E%3C/svg%3E" alt="E-Solutions Logo">
+                <h1>E-SOLUTIONS</h1>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="servicios.html" class="active">Servicios</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h2>Nuestros Servicios</h2>
+        <p>Soluciones tecnológicas completas para tus proyectos y necesidades</p>
+    </div>
+
+    <!-- Servicios Section -->
+    <section class="servicios-section">
+        <div class="services-grid">
+            <!-- Reparación de Computadoras -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-laptop-medical"></i>
+                </div>
+                <h3>Reparación de Computadoras</h3>
+                <p>Diagnóstico y reparación profesional de equipos de cómputo con garantía. Solucionamos problemas de hardware y software.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check-circle"></i> Diagnóstico gratuito</li>
+                    <li><i class="fas fa-check-circle"></i> Reparación de hardware</li>
+                    <li><i class="fas fa-check-circle"></i> Solución de problemas de software</li>
+                    <li><i class="fas fa-check-circle"></i> Garantía en todas las reparaciones</li>
+                    <li><i class="fas fa-check-circle"></i> Servicio a domicilio disponible</li>
+                </ul>
+                <a href="https://wa.me/593999999999?text=Hola,%20necesito%20reparación%20de%20computadora" class="btn-primary" target="_blank">Solicitar Servicio</a>
+            </div>
+
+            <!-- Compra de Equipos Dañados -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-recycle"></i>
+                </div>
+                <h3>Compra de Equipos Dañados</h3>
+                <p>Compramos tus equipos tecnológicos dañados o en desuso. Dale valor a lo que ya no usas y contribuye al reciclaje.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check-circle"></i> Valoración justa de equipos</li>
+                    <li><i class="fas fa-check-circle"></i> Pago inmediato</li>
+                    <li><i class="fas fa-check-circle"></i> Recolección a domicilio</li>
+                    <li><i class="fas fa-check-circle"></i> Reciclaje responsable</li>
+                    <li><i class="fas fa-check-circle"></i> Compramos laptops, PCs, componentes</li>
+                </ul>
+                <a href="https://wa.me/593999999999?text=Hola,%20quiero%20vender%20un%20equipo%20dañado" class="btn-primary" target="_blank">Vender Equipo</a>
+            </div>
+
+            <!-- Mantenimiento Preventivo -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h3>Mantenimiento Preventivo</h3>
+                <p>Mantenimiento profesional para alargar la vida útil de tus equipos y optimizar su rendimiento al máximo.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check-circle"></i> Limpieza profunda interna y externa</li>
+                    <li><i class="fas fa-check-circle"></i> Cambio de pasta térmica</li>
+                    <li><i class="fas fa-check-circle"></i> Optimización del sistema</li>
+                    <li><i class="fas fa-check-circle"></i> Actualización de drivers</li>
+                    <li><i class="fas fa-check-circle"></i> Reporte del estado del equipo</li>
+                </ul>
+                <a href="https://wa.me/593999999999?text=Hola,%20necesito%20mantenimiento%20preventivo" class="btn-primary" target="_blank">Agendar Mantenimiento</a>
+            </div>
+
+            <!-- Instalación de Software -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-download"></i>
+                </div>
+                <h3>Instalación de Software</h3>
+                <p>Instalación y configuración de sistemas operativos, programas especializados, drivers y actualizaciones.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check-circle"></i> Windows, Linux, macOS</li>
+                    <li><i class="fas fa-check-circle"></i> Software profesional (AutoCAD, Adobe, etc.)</li>
+                    <li><i class="fas fa-check-circle"></i> Configuración de programas</li>
+                    <li><i class="fas fa-check-circle"></i> Instalación de drivers</li>
+                    <li><i class="fas fa-check-circle"></i> Optimización post-instalación</li>
+                </ul>
+                <a href="https://wa.me/593999999999?text=Hola,%20necesito%20instalación%20de%20software" class="btn-primary" target="_blank">Solicitar Servicio</a>
+            </div>
+
+            <!-- GPS Satelital -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-satellite-dish"></i>
+                </div>
+                <h3>GPS Satelital</h3>
+                <p>Instalación y configuración de sistemas de rastreo GPS satelital para vehículos, flotas y activos de valor.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check-circle"></i> Rastreo en tiempo real</li>
+                    <li><i class="fas fa-check-circle"></i> Alertas de movimiento</li>
+                    <li><i class="fas fa-check-circle"></i> Historial de rutas</li>
+                    <li><i class="fas fa-check-circle"></i> Instalación profesional</li>
+                    <li><i class="fas fa-check-circle"></i> Soporte técnico 24/7</li>
+                </ul>
+                <a href="https://wa.me/593999999999?text=Hola,%20necesito%20información%20sobre%20GPS%20satelital" class="btn-primary" target="_blank">Más Información</a>
+            </div>
+
+            <!-- Impresión 3D -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <h3>Impresión 3D</h3>
+                <p>Servicio de impresión 3D para prototipos, piezas personalizadas, proyectos educativos y decoración.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check-circle"></i> Impresión en PLA y ABS</li>
+                    <li><i class="fas fa-check-circle"></i> Diseño 3D personalizado</li>
+                    <li><i class="fas fa-check-circle"></i> Prototipos funcionales</li>
+                    <li><i class="fas fa-check-circle"></i> Piezas de repuesto</li>
+                    <li><i class="fas fa-check-circle"></i> Proyectos educativos</li>
+                </ul>
+                <a href="https://wa.me/593999999999?text=Hola,%20necesito%20servicio%20de%20impresión%203D" class="btn-primary" target="_blank">Cotizar Proyecto</a>
+            </div>
+
+            <!-- Instalación de Cámaras -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3>Instalación de Cámaras de Seguridad</h3>
+                <p>Instalación profesional de sistemas de videovigilancia para hogares, negocios y empresas.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check-circle"></i> Asesoría en selección de equipos</li>
+                    <li><i class="fas fa-check-circle"></i> Instalación de cámaras IP y analógicas</li>
+                    <li><i class="fas fa-check-circle"></i> Configuración de grabadores DVR/NVR</li>
+                    <li><i class="fas fa-check-circle"></i> Acceso remoto desde celular</li>
+                    <li><i class="fas fa-check-circle"></i> Garantía en instalación</li>
+                </ul>
+                <a href="https://wa.me/593999999999?text=Hola,%20necesito%20instalación%20de%20cámaras" class="btn-primary" target="_blank">Solicitar Cotización</a>
+            </div>
+
+            <!-- Soluciones Personalizadas -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3>Soluciones Tecnológicas a Medida</h3>
+                <p>Desarrollamos soluciones tecnológicas personalizadas según tus necesidades específicas y presupuesto.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check-circle"></i> Automatización de procesos</li>
+                    <li><i class="fas fa-check-circle"></i> Proyectos de domótica</li>
+                    <li><i class="fas fa-check-circle"></i> Sistemas de control</li>
+                    <li><i class="fas fa-check-circle"></i> Asesoría técnica especializada</li>
+                    <li><i class="fas fa-check-circle"></i> Soporte continuo</li>
+                </ul>
+                <a href="https://wa.me/593999999999?text=Hola,%20necesito%20una%20solución%20personalizada" class="btn-primary" target="_blank">Consultar</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>¿Necesitas alguno de nuestros servicios?</h2>
+        <p>Contáctanos ahora y obtén una cotización sin compromiso. Nuestro equipo de expertos está listo para ayudarte.</p>
+        <a href="contacto.html" class="btn-secondary">Contactar Ahora</a>
+    </section>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/593999999999?text=Hola,%20estoy%20interesado%20en%20sus%20servicios" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 E-Solutions Ecuador. Todos los derechos reservados.</p>
+        <p>Soluciones Tecnológicas Integrales</p>
+        <div class="social-links">
+            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Toggle para móviles
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer click en un enlace
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

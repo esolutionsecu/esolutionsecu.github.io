@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nosotros - E-Solutions Ecuador</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #4A6B7C;
+            --secondary-color: #C5FF3E;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f5f5f5;
+            --text-dark: #333;
+            --text-light: #fff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        /* Header y Navegación */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2d4450 100%);
+            color: var(--text-light);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--secondary-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-light);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2d4450 100%);
+            color: var(--text-light);
+            padding: 120px 2rem 60px;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .page-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 60px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .about-text h3 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            background: var(--light-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-image i {
+            font-size: 15rem;
+            color: var(--primary-color);
+            opacity: 0.3;
+        }
+
+        /* Values */
+        .values-section {
+            background: var(--light-bg);
+            padding: 60px 2rem;
+            margin: 60px 0;
+        }
+
+        .values-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .value-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .value-card i {
+            font-size: 3.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .value-card h4 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .value-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 60px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .team-image {
+            height: 200px;
+            background: var(--light-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .team-image i {
+            font-size: 5rem;
+            color: var(--primary-color);
+        }
+
+        .team-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .team-info h4 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-info p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 15px rgba(0,0,0,0.3);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 2px 2px 25px rgba(0,0,0,0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: var(--primary-color);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .page-header h2 {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image i {
+                font-size: 8rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='95' fill='none' stroke='%234A6B7C' stroke-width='8'/%3E%3Cpath d='M100,40 L120,70 L100,70 L100,130 L120,130 L100,160 L80,130 L100,130 L100,70 L80,70 Z' fill='%234A6B7C'/%3E%3Ccircle cx='70' cy='60' r='8' fill='%23C5FF3E'/%3E%3Ccircle cx='130' cy='60' r='8' fill='%23C5FF3E'/%3E%3C/svg%3E" alt="E-Solutions Logo">
+                <h1>E-SOLUTIONS</h1>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="servicios.html">Servicios</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="nosotros.html" class="active">Nosotros</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h2>Sobre E-Solutions</h2>
+        <p>Conoce nuestra historia y compromiso con la tecnología</p>
+    </div>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Quiénes Somos</h3>
+                <p>E-Solutions es una empresa ecuatoriana con pasión por la tecnología y compromiso con la excelencia. Nacimos con la visión de democratizar el acceso a componentes electrónicos y soluciones tecnológicas de calidad.</p>
+                <p>Nos especializamos en tres áreas principales: venta de componentes electrónicos para estudiantes de ingeniería y makers, distribución de tecnología de vanguardia, y prestación de servicios tecnológicos especializados.</p>
+                <p>Desde nuestros inicios, hemos trabajado arduamente para convertirnos en el referente tecnológico de confianza, ofreciendo productos de calidad, precios justos y un servicio al cliente excepcional.</p>
+            </div>
+            <div class="about-image">
+                <i class="fas fa-microchip"></i>
+            </div>
+        </div>
+
+        <div class="about-content">
+            <div class="about-image">
+                <i class="fas fa-rocket"></i>
+            </div>
+            <div class="about-text">
+                <h3>Nuestra Misión</h3>
+                <p>Proporcionar soluciones tecnológicas integrales, accesibles y de calidad que impulsen la innovación y el desarrollo tecnológico en Ecuador.</p>
+                <p>Nos comprometemos a ser el puente entre la tecnología global y las necesidades locales, ofreciendo productos y servicios que potencien proyectos educativos, profesionales y empresariales.</p>
+                
+                <h3 style="margin-top: 2rem;">Nuestra Visión</h3>
+                <p>Ser la empresa líder en soluciones tecnológicas en Ecuador, reconocida por nuestra excelencia en servicio, innovación constante y compromiso con el desarrollo tecnológico del país.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="values-container">
+            <h2 class="section-title">Nuestros Valores</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <i class="fas fa-star"></i>
+                    <h4>Calidad</h4>
+                    <p>Ofrecemos únicamente productos y servicios de la más alta calidad, verificados y respaldados por garantías.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-handshake"></i>
+                    <h4>Confianza</h4>
+                    <p>Construimos relaciones duraderas con nuestros clientes basadas en honestidad, transparencia y compromiso.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h4>Innovación</h4>
+                    <p>Estamos siempre a la vanguardia, incorporando las últimas tecnologías y tendencias del mercado.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-users"></i>
+                    <h4>Servicio al Cliente</h4>
+                    <p>Nuestros clientes son nuestra prioridad. Brindamos atención personalizada y asesoría especializada.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-leaf"></i>
+                    <h4>Responsabilidad</h4>
+                    <p>Promovemos el reciclaje y manejo responsable de equipos tecnológicos en desuso.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h4>Educación</h4>
+                    <p>Apoyamos el aprendizaje y desarrollo de estudiantes y profesionales del área tecnológica.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <h2 class="section-title">Nuestro Equipo</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-image">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <div class="team-info">
+                    <h4>Equipo Técnico</h4>
+                    <p>Técnicos certificados con años de experiencia en reparación y mantenimiento de equipos</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-image">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <div class="team-info">
+                    <h4>Atención al Cliente</h4>
+                    <p>Personal capacitado para brindarte la mejor asesoría y soporte en tus proyectos</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-image">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <div class="team-info">
+                    <h4>Ingenieros Especialistas</h4>
+                    <p>Profesionales en electrónica, sistemas y telecomunicaciones</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-image">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <div class="team-info">
+                    <h4>Logística y Entrega</h4>
+                    <p>Equipo dedicado a garantizar entregas rápidas y seguras en todo Ecuador</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/593999999999?text=Hola,%20quiero%20conocer%20más%20sobre%20E-Solutions" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 E-Solutions Ecuador. Todos los derechos reservados.</p>
+        <p>Soluciones Tecnológicas Integrales</p>
+        <div class="social-links">
+            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Toggle para móviles
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer click en un enlace
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

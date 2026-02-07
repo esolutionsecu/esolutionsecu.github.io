@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - E-Solutions Ecuador</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #4A6B7C;
+            --secondary-color: #C5FF3E;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f5f5f5;
+            --text-dark: #333;
+            --text-light: #fff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        /* Header y Navegación */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2d4450 100%);
+            color: var(--text-light);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--secondary-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-light);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2d4450 100%);
+            color: var(--text-light);
+            padding: 120px 2rem 60px;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .page-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Productos Section */
+        .productos-section {
+            padding: 60px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--light-bg);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: var(--text-light);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            background: var(--light-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--primary-color);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: var(--secondary-color);
+            color: var(--text-dark);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .product-info p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .product-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: #4CAF50;
+            color: white;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .product-status.consultar {
+            background: #ff9800;
+        }
+
+        .btn-whatsapp {
+            padding: 0.5rem 1rem;
+            background: #25d366;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .btn-whatsapp:hover {
+            background: #1da851;
+            transform: scale(1.05);
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 15px rgba(0,0,0,0.3);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 2px 2px 25px rgba(0,0,0,0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: var(--primary-color);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .page-header h2 {
+                font-size: 2rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='95' fill='none' stroke='%234A6B7C' stroke-width='8'/%3E%3Cpath d='M100,40 L120,70 L100,70 L100,130 L120,130 L100,160 L80,130 L100,130 L100,70 L80,70 Z' fill='%234A6B7C'/%3E%3Ccircle cx='70' cy='60' r='8' fill='%23C5FF3E'/%3E%3Ccircle cx='130' cy='60' r='8' fill='%23C5FF3E'/%3E%3C/svg%3E" alt="E-Solutions Logo">
+                <h1>E-SOLUTIONS</h1>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="servicios.html">Servicios</a></li>
+                <li><a href="productos.html" class="active">Productos</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h2>Nuestros Productos</h2>
+        <p>Encuentra todo lo que necesitas para tus proyectos tecnológicos</p>
+    </div>
+
+    <!-- Productos Section -->
+    <section class="productos-section">
+        <div class="category-filters">
+            <button class="filter-btn active" data-category="todos">Todos</button>
+            <button class="filter-btn" data-category="componentes">Componentes</button>
+            <button class="filter-btn" data-category="tecnologia">Tecnología</button>
+            <button class="filter-btn" data-category="seguridad">Seguridad</button>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+            <!-- Componentes Electrónicos -->
+            <div class="product-card" data-category="componentes">
+                <div class="product-image">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Componentes</span>
+                    <h3>Arduino UNO R3</h3>
+                    <p>Placa de desarrollo ideal para iniciar en electrónica y robótica</p>
+                    <div class="product-price">$25.00</div>
+                    <div class="product-footer">
+                        <span class="product-status">En stock</span>
+                        <a href="https://wa.me/593999999999?text=Hola,%20me%20interesa%20el%20Arduino%20UNO%20R3" class="btn-whatsapp" target="_blank">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="componentes">
+                <div class="product-image">
+                    <i class="fas fa-broadcast-tower"></i>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Componentes</span>
+                    <h3>Módulo ESP32</h3>
+                    <p>Microcontrolador con WiFi y Bluetooth integrado para IoT</p>
+                    <div class="product-price">$12.00</div>
+                    <div class="product-footer">
+                        <span class="product-status">En stock</span>
+                        <a href="https://wa.me/593999999999?text=Hola,%20me%20interesa%20el%20Módulo%20ESP32" class="btn-whatsapp" target="_blank">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="componentes">
+                <div class="product-image">
+                    <i class="fas fa-thermometer-half"></i>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Componentes</span>
+                    <h3>Sensores DHT22</h3>
+                    <p>Sensor de temperatura y humedad de alta precisión</p>
+                    <div class="product-price">$5.00</div>
+                    <div class="product-footer">
+                        <span class="product-status">En stock</span>
+                        <a href="https://wa.me/593999999999?text=Hola,%20me%20interesa%20el%20Sensor%20DHT22" class="btn-whatsapp" target="_blank">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="componentes">
+                <div class="product-image">
+                    <i class="fas fa-wave-square"></i>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Componentes</span>
+                    <h3>Sensor Ultrasónico HC-SR04</h3>
+                    <p>Medidor de distancia por ultrasonido, ideal para robótica</p>
+                    <div class="product-price">$3.50</div>
+                    <div class="product-footer">
+                        <span class="product-status">En stock</span>
+                        <a href="https://wa.me/593999999999?text=Hola,%20me%20interesa%20el%20Sensor%20Ultrasónico" class="btn-whatsapp" target="_blank">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="componentes">
+                <div class="product-image">
+                    <i class="fas fa-car-battery"></i>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Componentes</span>
+                    <h3>Motor DC con Reductor</h3>
+                    <p>Motor de corriente continua con caja reductora</p>
+                    <div class="product-price">$8.00</div>
+                    <div class="product-footer">
+                        <span class="product-status">En stock</span>
+                        <a href="https://wa.me/593999999999?text=Hola,%20me%20interesa%20el%20Motor%20DC" class="btn-whatsapp" target="_blank">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="componentes">
+                <div class="product-image">
+                    <i class="fas fa-compact-disc"></i>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Componentes</span>
+                    <h3>Servomotor SG90</h3>
+                    <p>Servomotor de 9g, 180° de rotación</p>
+                    <div class="product-price">$5.00</div>
+                    <div class="product-footer">
+                        <span class="product-status">En stock</span>
+                        <a href="https://wa.me/593999999999?text=Hola,%20me%20interesa%20el%20Servomotor%20SG90" class="btn-whatsapp" target="_blank">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="componentes">
+                <div class="product-image">
+                    <i class="fas fa-led"></i>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Componentes</span>
+                    <h3>LED RGB WS2812B (Tira)</h3>
+                    <p>Tira de LEDs direccionables individualmente</p>
+                    <div class="product-price">Desde $15.00</div>
+                    <div class="product-footer">
+                        <span class="product-status">En stock</span>
+                        <a href="https://wa.me/593999999999?text=Hola,%20me%20interesa%20la%20Tira%20LED%20RGB" class="btn-whatsapp" target="_blank">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="componentes">
+                <div class="product-image">
+                    <i class="fas fa-plug"></i>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Componentes</span>
+                    <h3>Módulo Relé 4 Canales</h3>
+                    <p>Control de cargas de alta potencia</p>
+                    <div class="product-price">$10.00</div>
+                    <div class="product-footer">
+                        <span class="product-status">En stock</span>
+                        <a href="https://wa.me/593999999999?text=Hola,%20me%20interesa%20el%20Módulo%20Relé" class="btn-whatsapp" target="_blank">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tecnología -->
+            <div class="product-card" data-category="tecnologia">
+                <div class="product-image">
+                    <i class="fas fa-laptop"></i>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Tecnología</span>
+                    <h3>Laptops Gaming y Oficina</h3>
+                    <p>Computadoras portátiles nuevas y reacondicionadas</p>
+                    <div class="product-price">Consultar</div>
+                    <div class="product-footer">
+                        <span class="product-status consultar">Disponible</span>
+                        <a href="https://wa.me/593999999999?text=Hola,%20me%20interesan%20las%20laptops" class="btn-whatsapp" target="_blank">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="tecnologia">
+                <div class="product-image">
+                    <i class="fas fa-desktop"></i>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Tecnología</span>
+                    <h3>PC de Escritorio</h3>
+                    <p>Armamos tu PC según tus necesidades</p>
+                    <div class="product-price">Consultar</div>
+                    <div class="product-footer">
+                        <span class="product-status consultar">Disponible</span>
+                        <a href="https://wa.me/593999999999?text=Hola,%20quiero%20armar%20una%20PC" class="btn-whatsapp" target="_blank">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="tecnologia">
+                <div class="product-image">
+                    <i class="fas fa-memory"></i>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Tecnología</span>
+                    <h3>Memorias RAM DDR4/DDR5</h3>
+                    <p>Memorias de 4GB hasta 32GB</p>
+                    <div class="product-price">Desde $25.00</div>
+                    <div class="product-footer">
+                        <span class="product-status">En stock</span>
+                        <a href="https://wa.me/593999999999?text=Hola,%20me%20interesan%20las%20memorias%20RAM" class="btn-whatsapp" target="_blank">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="tecnologia">
+                <div class="product-image">
+                    <i class="fas fa-hdd"></i>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Tecnología</span>
+                    <h3>Discos SSD y HDD</h3>
+                    <p>Almacenamiento de 120GB hasta 2TB</p>
+                    <div class="product-price">Desde $30.00</div>
+                    <div class="product-footer">
+                        <span class="product-status">En stock</span>
+                        <a href="https://wa.me/593999999999?text=Hola,%20me%20interesan%20los%20discos%20duros" class="btn-whatsapp" target="_blank">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="tecnologia">
+                <div class="product-image">
+                    <i class="fas fa-keyboard"></i>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Tecnología</span>
+                    <h3>Teclados y Mouse</h3>
+                    <p>Periféricos gaming y de oficina</p>
+                    <div class="product-price">Desde $15.00</div>
+                    <div class="product-footer">
+                        <span class="product-status">En stock</span>
+                        <a href="https://wa.me/593999999999?text=Hola,%20me%20interesan%20los%20periféricos" class="btn-whatsapp" target="_blank">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="tecnologia">
+                <div class="product-image">
+                    <i class="fas fa-tv"></i>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Tecnología</span>
+                    <h3>Monitores LED/LCD</h3>
+                    <p>Pantallas desde 19" hasta 32"</p>
+                    <div class="product-price">Desde $80.00</div>
+                    <div class="product-footer">
+                        <span class="product-status">En stock</span>
+                        <a href="https://wa.me/593999999999?text=Hola,%20me%20interesan%20los%20monitores" class="btn-whatsapp" target="_blank">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seguridad -->
+            <div class="product-card" data-category="seguridad">
+                <div class="product-image">
+                    <i class="fas fa-video"></i>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Seguridad</span>
+                    <h3>Cámaras IP 1080p</h3>
+                    <p>Cámaras de vigilancia con visión nocturna</p>
+                    <div class="product-price">Desde $60.00</div>
+                    <div class="product-footer">
+                        <span class="product-status">En stock</span>
+                        <a href="https://wa.me/593999999999?text=Hola,%20me%20interesan%20las%20cámaras%20IP" class="btn-whatsapp" target="_blank">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="seguridad">
+                <div class="product-image">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Seguridad</span>
+                    <h3>Cámaras Analógicas AHD</h3>
+                    <p>Cámaras de alta definición analógicas</p>
+                    <div class="product-price">Desde $45.00</div>
+                    <div class="product-footer">
+                        <span class="product-status">En stock</span>
+                        <a href="https://wa.me/593999999999?text=Hola,%20me%20interesan%20las%20cámaras%20AHD" class="btn-whatsapp" target="_blank">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="seguridad">
+                <div class="product-image">
+                    <i class="fas fa-hdd"></i>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Seguridad</span>
+                    <h3>DVR 4/8/16 Canales</h3>
+                    <p>Grabador de video digital para cámaras</p>
+                    <div class="product-price">Desde $120.00</div>
+                    <div class="product-footer">
+                        <span class="product-status">En stock</span>
+                        <a href="https://wa.me/593999999999?text=Hola,%20me%20interesa%20un%20DVR" class="btn-whatsapp" target="_blank">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="seguridad">
+                <div class="product-image">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Seguridad</span>
+                    <h3>NVR para Cámaras IP</h3>
+                    <p>Grabador de red para cámaras IP</p>
+                    <div class="product-price">Desde $150.00</div>
+                    <div class="product-footer">
+                        <span class="product-status">En stock</span>
+                        <a href="https://wa.me/593999999999?text=Hola,%20me%20interesa%20un%20NVR" class="btn-whatsapp" target="_blank">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="seguridad">
+                <div class="product-image">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Seguridad</span>
+                    <h3>GPS Rastreador Vehicular</h3>
+                    <p>Dispositivo de rastreo GPS en tiempo real</p>
+                    <div class="product-price">Consultar</div>
+                    <div class="product-footer">
+                        <span class="product-status consultar">Disponible</span>
+                        <a href="https://wa.me/593999999999?text=Hola,%20me%20interesa%20el%20GPS%20rastreador" class="btn-whatsapp" target="_blank">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="seguridad">
+                <div class="product-image">
+                    <i class="fas fa-ethernet"></i>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Seguridad</span>
+                    <h3>Cable UTP Cat6</h3>
+                    <p>Cable de red para instalaciones de cámaras</p>
+                    <div class="product-price">$0.50/metro</div>
+                    <div class="product-footer">
+                        <span class="product-status">En stock</span>
+                        <a href="https://wa.me/593999999999?text=Hola,%20me%20interesa%20el%20cable%20UTP" class="btn-whatsapp" target="_blank">Consultar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/593999999999?text=Hola,%20estoy%20interesado%20en%20sus%20productos" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 E-Solutions Ecuador. Todos los derechos reservados.</p>
+        <p>Soluciones Tecnológicas Integrales</p>
+        <div class="social-links">
+            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Toggle para móviles
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer click en un enlace
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Filtros de productos
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remover clase active de todos los botones
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Agregar clase active al botón clickeado
+                button.classList.add('active');
+
+                const category = button.getAttribute('data-category');
+
+                productCards.forEach(card => {
+                    if (category === 'todos' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 10);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

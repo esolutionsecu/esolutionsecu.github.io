@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Solutions Ecuador - Tecnología y Componentes Electrónicos</title>
+    <title>E-Solutions Ecuador - Soluciones Tecnológicas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -77,7 +77,8 @@
             transition: color 0.3s;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .nav-links a.active {
             color: var(--secondary-color);
         }
 
@@ -99,21 +100,24 @@
         .hero {
             background: linear-gradient(135deg, var(--primary-color) 0%, #2d4450 100%);
             color: var(--text-light);
-            padding: 150px 2rem 100px;
+            padding: 180px 2rem 120px;
             text-align: center;
             margin-top: 70px;
         }
 
         .hero h2 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
             animation: fadeInUp 1s;
         }
 
         .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
             animation: fadeInUp 1.2s;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .cta-buttons {
@@ -121,6 +125,7 @@
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
+            animation: fadeInUp 1.4s;
         }
 
         .btn {
@@ -157,8 +162,8 @@
             color: var(--primary-color);
         }
 
-        /* Secciones */
-        section {
+        /* Secciones Destacadas */
+        .features {
             padding: 80px 2rem;
             max-width: 1200px;
             margin: 0 auto;
@@ -181,204 +186,105 @@
             margin: 1rem auto;
         }
 
-        /* Servicios */
-        .services-grid {
+        .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+            margin-bottom: 3rem;
         }
 
-        .service-card {
-            background: var(--light-bg);
+        .feature-card {
+            background: white;
             padding: 2rem;
             border-radius: 15px;
             text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: all 0.3s;
             border: 2px solid transparent;
         }
 
-        .service-card:hover {
+        .feature-card:hover {
             transform: translateY(-10px);
             border-color: var(--secondary-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
-        .service-card i {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .service-card h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        /* Productos */
-        .category-filters {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 0.8rem 1.5rem;
-            background: var(--light-bg);
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
-
-        .filter-btn:hover,
-        .filter-btn.active {
-            background: var(--primary-color);
-            color: var(--text-light);
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 200px;
-            background: var(--light-bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .feature-card i {
             font-size: 4rem;
             color: var(--primary-color);
+            margin-bottom: 1rem;
         }
 
-        .product-info {
-            padding: 1.5rem;
-        }
-
-        .product-category {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            background: var(--secondary-color);
-            color: var(--text-dark);
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .product-info h3 {
+        .feature-card h3 {
             color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .product-price {
+            margin-bottom: 1rem;
             font-size: 1.5rem;
-            color: var(--secondary-color);
-            font-weight: 700;
-            margin: 1rem 0;
-            color: var(--primary-color);
         }
 
-        .product-status {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            background: #4CAF50;
-            color: white;
-            border-radius: 15px;
-            font-size: 0.8rem;
-        }
-
-        /* Sobre Nosotros */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-text h3 {
-            color: var(--primary-color);
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-
-        .about-text p {
-            margin-bottom: 1rem;
+        .feature-card p {
+            color: var(--text-dark);
             line-height: 1.8;
         }
 
-        .about-features {
-            display: grid;
-            gap: 1rem;
+        .feature-card .btn {
+            margin-top: 1rem;
         }
 
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
+        /* Stats Section */
+        .stats {
             background: var(--light-bg);
-            border-radius: 10px;
+            padding: 60px 2rem;
         }
 
-        .feature-item i {
-            font-size: 2rem;
-            color: var(--secondary-color);
-        }
-
-        /* Contacto */
-        .contact-grid {
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
-        }
-
-        .contact-card {
             text-align: center;
+        }
+
+        .stat-card {
             padding: 2rem;
-            background: var(--light-bg);
-            border-radius: 15px;
         }
 
-        .contact-card i {
+        .stat-card i {
             font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .contact-card h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .contact-card a {
-            color: var(--text-dark);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .contact-card a:hover {
             color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .stat-card h3 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2d4450 100%);
+            color: var(--text-light);
+            padding: 80px 2rem;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* WhatsApp Float Button */
@@ -478,10 +384,6 @@
                 font-size: 1rem;
             }
 
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-
             .section-title {
                 font-size: 2rem;
             }
@@ -497,11 +399,11 @@
                 <h1>E-SOLUTIONS</h1>
             </div>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#productos">Productos</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="index.html" class="active">Inicio</a></li>
+                <li><a href="servicios.html">Servicios</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
             </ul>
             <div class="menu-toggle" id="menuToggle">
                 <span></span>
@@ -512,293 +414,75 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="inicio">
+    <section class="hero">
         <h2>Soluciones Tecnológicas Integrales</h2>
-        <p>Componentes electrónicos, tecnología de vanguardia y servicios especializados</p>
+        <p>Componentes electrónicos, tecnología de vanguardia y servicios especializados para estudiantes, empresas y profesionales</p>
         <div class="cta-buttons">
-            <a href="#productos" class="btn btn-primary">Ver Productos</a>
-            <a href="#contacto" class="btn btn-secondary">Contáctanos</a>
+            <a href="productos.html" class="btn btn-primary">Ver Productos</a>
+            <a href="servicios.html" class="btn btn-secondary">Nuestros Servicios</a>
         </div>
     </section>
 
-    <!-- Servicios -->
-    <section id="servicios">
-        <h2 class="section-title">Nuestros Servicios</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <i class="fas fa-laptop-medical"></i>
-                <h3>Reparación de Computadoras</h3>
-                <p>Diagnóstico y reparación profesional de equipos de cómputo con garantía de servicio.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-recycle"></i>
-                <h3>Compra de Equipos Dañados</h3>
-                <p>Compramos tus equipos tecnológicos dañados o en desuso al mejor precio del mercado.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-tools"></i>
-                <h3>Mantenimiento Preventivo</h3>
-                <p>Mantenimiento profesional para alargar la vida útil de tus equipos y optimizar su rendimiento.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-download"></i>
-                <h3>Instalación de Software</h3>
-                <p>Instalación y configuración de sistemas operativos, programas especializados y actualizaciones.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-satellite-dish"></i>
-                <h3>GPS Satelital</h3>
-                <p>Instalación y configuración de sistemas de rastreo GPS satelital para vehículos y activos.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-cube"></i>
-                <h3>Impresión 3D</h3>
-                <p>Servicio de impresión 3D para prototipos, piezas personalizadas y proyectos especiales.</p>
-            </div>
-            <div class="service-card">
+    <!-- Features -->
+    <section class="features">
+        <h2 class="section-title">¿Qué Ofrecemos?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
                 <i class="fas fa-microchip"></i>
                 <h3>Componentes Electrónicos</h3>
-                <p>Venta de componentes para proyectos de electrónica, robótica y domótica.</p>
+                <p>Arduino, ESP32, sensores, módulos y todo lo que necesitas para tus proyectos de electrónica, robótica y domótica.</p>
+                <a href="productos.html" class="btn btn-primary">Ver Catálogo</a>
             </div>
-            <div class="service-card">
-                <i class="fas fa-lightbulb"></i>
-                <h3>Soluciones a Medida</h3>
-                <p>Desarrollamos soluciones tecnológicas personalizadas según tus necesidades específicas.</p>
+            <div class="feature-card">
+                <i class="fas fa-laptop"></i>
+                <h3>Tecnología</h3>
+                <p>Computadoras, laptops, componentes PC, cámaras de vigilancia y equipos de última generación.</p>
+                <a href="productos.html" class="btn btn-primary">Explorar</a>
             </div>
-        </div>
-    </section>
-
-    <!-- Productos -->
-    <section id="productos">
-        <h2 class="section-title">Catálogo de Productos</h2>
-        
-        <div class="category-filters">
-            <button class="filter-btn active" data-category="todos">Todos</button>
-            <button class="filter-btn" data-category="componentes">Componentes</button>
-            <button class="filter-btn" data-category="tecnologia">Tecnología</button>
-            <button class="filter-btn" data-category="seguridad">Seguridad</button>
-        </div>
-
-        <div class="products-grid" id="productsGrid">
-            <!-- Componentes Electrónicos -->
-            <div class="product-card" data-category="componentes">
-                <div class="product-image">
-                    <i class="fas fa-microchip"></i>
-                </div>
-                <div class="product-info">
-                    <span class="product-category">Componentes</span>
-                    <h3>Arduino UNO R3</h3>
-                    <p>Placa de desarrollo para proyectos de electrónica y robótica</p>
-                    <div class="product-price">$25.00</div>
-                    <span class="product-status">En stock</span>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="componentes">
-                <div class="product-image">
-                    <i class="fas fa-broadcast-tower"></i>
-                </div>
-                <div class="product-info">
-                    <span class="product-category">Componentes</span>
-                    <h3>Módulo ESP32</h3>
-                    <p>Microcontrolador con WiFi y Bluetooth integrado</p>
-                    <div class="product-price">$12.00</div>
-                    <span class="product-status">En stock</span>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="componentes">
-                <div class="product-image">
-                    <i class="fas fa-thermometer-half"></i>
-                </div>
-                <div class="product-info">
-                    <span class="product-category">Componentes</span>
-                    <h3>Sensores Varios</h3>
-                    <p>Temperatura, humedad, movimiento, ultrasonido y más</p>
-                    <div class="product-price">Desde $3.00</div>
-                    <span class="product-status">En stock</span>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="componentes">
-                <div class="product-image">
-                    <i class="fas fa-car-battery"></i>
-                </div>
-                <div class="product-info">
-                    <span class="product-category">Componentes</span>
-                    <h3>Motores y Servos</h3>
-                    <p>Motores DC, paso a paso y servomotores</p>
-                    <div class="product-price">Desde $5.00</div>
-                    <span class="product-status">En stock</span>
-                </div>
-            </div>
-
-            <!-- Tecnología -->
-            <div class="product-card" data-category="tecnologia">
-                <div class="product-image">
-                    <i class="fas fa-laptop"></i>
-                </div>
-                <div class="product-info">
-                    <span class="product-category">Tecnología</span>
-                    <h3>Laptops</h3>
-                    <p>Computadoras portátiles nuevas y reacondicionadas</p>
-                    <div class="product-price">Consultar</div>
-                    <span class="product-status">Disponible</span>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="tecnologia">
-                <div class="product-image">
-                    <i class="fas fa-desktop"></i>
-                </div>
-                <div class="product-info">
-                    <span class="product-category">Tecnología</span>
-                    <h3>Computadoras de Escritorio</h3>
-                    <p>PCs armadas según tus necesidades</p>
-                    <div class="product-price">Consultar</div>
-                    <span class="product-status">Disponible</span>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="tecnologia">
-                <div class="product-image">
-                    <i class="fas fa-memory"></i>
-                </div>
-                <div class="product-info">
-                    <span class="product-category">Tecnología</span>
-                    <h3>Componentes PC</h3>
-                    <p>Memorias RAM, discos duros, tarjetas gráficas</p>
-                    <div class="product-price">Desde $20.00</div>
-                    <span class="product-status">En stock</span>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="tecnologia">
-                <div class="product-image">
-                    <i class="fas fa-keyboard"></i>
-                </div>
-                <div class="product-info">
-                    <span class="product-category">Tecnología</span>
-                    <h3>Periféricos</h3>
-                    <p>Teclados, mouse, audífonos y más accesorios</p>
-                    <div class="product-price">Desde $10.00</div>
-                    <span class="product-status">En stock</span>
-                </div>
-            </div>
-
-            <!-- Seguridad -->
-            <div class="product-card" data-category="seguridad">
-                <div class="product-image">
-                    <i class="fas fa-video"></i>
-                </div>
-                <div class="product-info">
-                    <span class="product-category">Seguridad</span>
-                    <h3>Cámaras de Vigilancia</h3>
-                    <p>Sistemas de videovigilancia IP y analógicas</p>
-                    <div class="product-price">Desde $50.00</div>
-                    <span class="product-status">En stock</span>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="seguridad">
-                <div class="product-image">
-                    <i class="fas fa-hdd"></i>
-                </div>
-                <div class="product-info">
-                    <span class="product-category">Seguridad</span>
-                    <h3>DVR/NVR</h3>
-                    <p>Grabadores de video digital para cámaras de seguridad</p>
-                    <div class="product-price">Desde $120.00</div>
-                    <span class="product-status">En stock</span>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="seguridad">
-                <div class="product-image">
-                    <i class="fas fa-map-marked-alt"></i>
-                </div>
-                <div class="product-info">
-                    <span class="product-category">Seguridad</span>
-                    <h3>GPS Rastreador</h3>
-                    <p>Dispositivos de rastreo satelital para vehículos</p>
-                    <div class="product-price">Consultar</div>
-                    <span class="product-status">Disponible</span>
-                </div>
+            <div class="feature-card">
+                <i class="fas fa-tools"></i>
+                <h3>Servicios Especializados</h3>
+                <p>Reparación, mantenimiento, instalación de software, GPS satelital, impresión 3D y más.</p>
+                <a href="servicios.html" class="btn btn-primary">Conocer Más</a>
             </div>
         </div>
     </section>
 
-    <!-- Sobre Nosotros -->
-    <section id="nosotros">
-        <h2 class="section-title">Sobre E-Solutions</h2>
-        <div class="about-content">
-            <div class="about-text">
-                <h3>Tu socio tecnológico de confianza</h3>
-                <p>E-Solutions es una empresa ecuatoriana especializada en proveer soluciones tecnológicas integrales. Desde componentes electrónicos para estudiantes de ingeniería hasta equipos de última generación, pasando por servicios de mantenimiento y reparación.</p>
-                <p>Nos apasiona la tecnología y nos comprometemos a ofrecer productos de calidad y un servicio excepcional a todos nuestros clientes.</p>
-                <p>Con años de experiencia en el sector, nos hemos convertido en el referente para proyectos de electrónica, robótica, domótica y soluciones tecnológicas empresariales.</p>
+    <!-- Stats -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fas fa-box"></i>
+                <h3>500+</h3>
+                <p>Productos Disponibles</p>
             </div>
-            <div class="about-features">
-                <div class="feature-item">
-                    <i class="fas fa-check-circle"></i>
-                    <div>
-                        <h4>Productos de Calidad</h4>
-                        <p>Componentes y equipos verificados</p>
-                    </div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-headset"></i>
-                    <div>
-                        <h4>Atención Personalizada</h4>
-                        <p>Asesoría técnica especializada</p>
-                    </div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-shipping-fast"></i>
-                    <div>
-                        <h4>Entrega Rápida</h4>
-                        <p>Envíos a todo Ecuador</p>
-                    </div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-shield-alt"></i>
-                    <div>
-                        <h4>Garantía Incluida</h4>
-                        <p>Respaldo en todos nuestros productos</p>
-                    </div>
-                </div>
+            <div class="stat-card">
+                <i class="fas fa-users"></i>
+                <h3>1000+</h3>
+                <p>Clientes Satisfechos</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-wrench"></i>
+                <h3>8</h3>
+                <p>Servicios Especializados</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-shipping-fast"></i>
+                <h3>24h</h3>
+                <p>Entrega Express</p>
             </div>
         </div>
     </section>
 
-    <!-- Contacto -->
-    <section id="contacto">
-        <h2 class="section-title">Contáctanos</h2>
-        <div class="contact-grid">
-            <div class="contact-card">
-                <i class="fab fa-whatsapp"></i>
-                <h3>WhatsApp</h3>
-                <a href="https://wa.me/593999999999" target="_blank">+593 99 999 9999</a>
-                <p>Escríbenos para cotizaciones y consultas</p>
-            </div>
-            <div class="contact-card">
-                <i class="fas fa-envelope"></i>
-                <h3>Email</h3>
-                <a href="mailto:info@esolutions.com.ec">info@esolutions.com.ec</a>
-                <p>Envíanos tu consulta por correo</p>
-            </div>
-            <div class="contact-card">
-                <i class="fas fa-map-marker-alt"></i>
-                <h3>Ubicación</h3>
-                <p>Ecuador</p>
-                <p>Servicio a todo el país</p>
-            </div>
-            <div class="contact-card">
-                <i class="fas fa-clock"></i>
-                <h3>Horario</h3>
-                <p>Lunes a Viernes: 9:00 - 18:00</p>
-                <p>Sábados: 9:00 - 13:00</p>
-            </div>
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>¿Listo para empezar tu proyecto?</h2>
+        <p>Contáctanos hoy y obtén asesoría personalizada para tu proyecto tecnológico</p>
+        <div class="cta-buttons">
+            <a href="contacto.html" class="btn btn-primary">Contactar Ahora</a>
+            <a href="https://wa.me/593999999999" class="btn btn-secondary" target="_blank">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
         </div>
     </section>
 
@@ -832,69 +516,6 @@
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
             });
-        });
-
-        // Filtros de productos
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const productCards = document.querySelectorAll('.product-card');
-
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Remover clase active de todos los botones
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                // Agregar clase active al botón clickeado
-                button.classList.add('active');
-
-                const category = button.getAttribute('data-category');
-
-                productCards.forEach(card => {
-                    if (category === 'todos' || card.getAttribute('data-category') === category) {
-                        card.style.display = 'block';
-                        setTimeout(() => {
-                            card.style.opacity = '1';
-                            card.style.transform = 'scale(1)';
-                        }, 10);
-                    } else {
-                        card.style.opacity = '0';
-                        card.style.transform = 'scale(0.8)';
-                        setTimeout(() => {
-                            card.style.display = 'none';
-                        }, 300);
-                    }
-                });
-            });
-        });
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Animación al hacer scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.service-card, .product-card').forEach(card => {
-            observer.observe(card);
         });
     </script>
 </body>
